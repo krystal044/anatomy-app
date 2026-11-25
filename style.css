@@ -53,11 +53,22 @@ nav button.on { color: var(--btn); }
 .seg { display: flex; background: var(--card); border-radius: 10px; padding: 3px; margin-bottom: 8px; }
 .seg button { flex: 1; border: 0; background: none; color: var(--text); padding: 7px; border-radius: 8px; font-size: 14px; cursor: pointer; }
 .seg button.on { background: var(--bg); font-weight: 600; box-shadow: 0 1px 3px #0002; }
-svg.body { display: block; width: 100%; max-width: 320px; margin: 0 auto; }
-svg .hot { fill: none; stroke: var(--bone); stroke-linecap: round; stroke-linejoin: round; cursor: pointer; transition: stroke .15s; }
-svg .hot.fill { fill: var(--bone); stroke: #b9ae92; stroke-width: 2; }
-svg .hot:hover, svg .hot.sel { stroke: var(--btn); }
-svg .hot.fill:hover, svg .hot.fill.sel { fill: color-mix(in srgb, var(--btn) 35%, var(--bone)); }
+:root { --bone-edge: #8f8260; --hole: #5d5543; --hl: color-mix(in srgb, var(--btn) 60%, #efe5cc); }
+.atlas-box { background: var(--card); border-radius: 16px; padding: 10px 6px; }
+svg.body { display: block; width: 100%; max-width: 330px; margin: 0 auto; }
+svg .zone { cursor: pointer; }
+svg .zone .bn { fill: var(--bone); stroke: var(--bone-edge); stroke-width: 1.1; transition: fill .15s; }
+svg .zone .ln { stroke: var(--bone); stroke-linecap: round; transition: stroke .15s; fill: none; }
+svg .zone .ln-edge { stroke: var(--bone-edge); stroke-linecap: round; fill: none; }
+svg .hole { fill: var(--hole); pointer-events: none; }
+svg .zone:hover .bn, svg .zone.sel .bn { fill: var(--hl); }
+svg .zone:hover .ln, svg .zone.sel .ln { stroke: var(--hl); }
+.chev { color: var(--hint); font-size: 22px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.chip { border: 0; border-radius: 16px; padding: 8px 14px; background: var(--card); color: var(--text); font-size: 14px; cursor: pointer; }
+#sheet ul.sh { margin: 0 0 4px; padding-left: 20px; }
+#sheet ul.sh li { margin: 3px 0; }
+#sheet .box { max-height: 85vh; overflow: auto; }
 .hint { color: var(--hint); text-align: center; font-size: 13px; }
 
 #sheet { position: fixed; inset: 0; z-index: 20; background: #0006; display: flex; align-items: flex-end; }
