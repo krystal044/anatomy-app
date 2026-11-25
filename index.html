@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Анатомия</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header id="top"><h1 id="title">Конспекты</h1><input id="search" type="search" placeholder="Поиск…" autocomplete="off"></header>
+  <main id="view"></main>
+  <nav id="tabs">
+    <button data-tab="notes" class="on"><span>📚</span>Конспекты</button>
+    <button data-tab="atlas"><span>🫀</span>Атлас</button>
+    <button data-tab="quiz"><span>🎯</span>Тест</button>
+    <button data-tab="fav"><span>⭐</span>Избранное</button>
+  </nav>
+  <div id="sheet" hidden></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
