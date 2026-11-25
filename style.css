@@ -51,7 +51,7 @@ nav button.on { color: var(--btn); }
 .back { background: none; border: 0; color: var(--link); font-size: 16px; padding: 4px 0; cursor: pointer; }
 
 .seg { display: flex; background: var(--card); border-radius: 10px; padding: 3px; margin-bottom: 8px; }
-.seg button { flex: 1; border: 0; background: none; color: var(--text); padding: 7px; border-radius: 8px; font-size: 14px; cursor: pointer; }
+.seg button { flex: 1; border: 0; background: none; color: var(--text); padding: 7px 2px; border-radius: 8px; font-size: 13px; cursor: pointer; }
 .seg button.on { background: var(--bg); font-weight: 600; box-shadow: 0 1px 3px #0002; }
 :root { --bone-edge: #8f8260; --hole: #5d5543; --hl: color-mix(in srgb, var(--btn) 60%, #efe5cc); }
 .atlas-box { background: var(--card); border-radius: 16px; padding: 10px 6px; }
@@ -83,3 +83,8 @@ svg .zone:hover .ln, svg .zone.sel .ln { stroke: var(--hl); }
 .bar { height: 6px; border-radius: 3px; background: var(--card); overflow: hidden; }
 .bar i { display: block; height: 100%; background: var(--btn); transition: width .2s; }
 .score { font-size: 48px; text-align: center; margin: 24px 0 0; font-weight: 700; }
+
+svg.photo { max-width: 340px; }
+.atlas-box:has(svg.photo) { background: #fff; padding: 0; overflow: hidden; }
+svg .zone .zp { fill: transparent; stroke: none; stroke-linejoin: round; cursor: pointer; transition: fill .15s; }
+svg .zone:hover .zp, svg .zone.sel .zp { fill: color-mix(in srgb, var(--btn) 38%, transparent); stroke: var(--btn); stroke-width: 1.6; }

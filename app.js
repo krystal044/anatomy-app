@@ -14,7 +14,7 @@
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
   let tab = "notes", openTopic = null, navSystem = null, navSection = null;
-  let atlasMode = "body", atlasSel = null, quiz = null;
+  let atlasMode = "body", atlasSel = null;
 
   // ---- Темы из учебника: data/anatomy/index.json + data/anatomy/<slug>.json (грузятся по требованию) ----
   const SEC_EMOJI = { "Общая остеология": "📘", "Позвоночный столб": "🦴", "Грудная клетка": "🫁", "Череп": "💀", "Верхняя конечность": "💪", "Нижняя конечность": "🦵" };
@@ -63,8 +63,8 @@
   function render() {
     document.querySelectorAll("#tabs button").forEach((b) => b.classList.toggle("on", b.dataset.tab === tab));
     const q = search.value.trim().toLowerCase();
-    $("#top").style.display = (tab === "quiz" || openTopic) ? "none" : "";
-    ({ notes: renderNotes, atlas: renderAtlas, quiz: renderQuiz, fav: renderFav })[tab](q);
+    $("#top").style.display = openTopic ? "none" : "";
+    ({ notes: renderNotes, atlas: renderAtlas, fav: renderFav })[tab](q);
     setBack();
     window.scrollTo(0, 0);
   }
@@ -206,48 +206,12 @@
   const mirror = (inner) => inner + `<g transform="translate(300 0) scale(-1 1)">${inner}</g>`;
 
   function bodySVG() {
-    // позвонки: ряды скруглённых блоков
-    const blocks = (n, y0, step, h, w0, w1) => Array.from({ length: n }, (_, i) => {
-      const w = w0 + (w1 - w0) * (n === 1 ? 0 : i / (n - 1)); const y = y0 + i * step;
-      return `<rect class="bn" x="${150 - w / 2}" y="${y}" width="${w}" height="${h}" rx="${h / 2.6}"/>`;
-    }).join("");
-    // рёбра (правая сторона; левая — зеркально)
-    const ribs = Array.from({ length: 12 }, (_, i) => {
-      const y0 = 138 + i * 7.6, W = i < 7 ? 22 + 5.2 * i : 58 - (i - 6) * 5.5;
-      const end = i < 7 ? `Q${154 + W * 0.62} ${y0 + 38} ${i < 7 ? 156 : 0} ${y0 + 30 + i * 1.7}` : `L${154 + W * 0.55} ${y0 + 32}`;
-      return PL(`M154 ${y0} Q${154 + W} ${y0 - 6} ${154 + W * 0.88} ${y0 + 16} ${end}`, 3);
-    }).join("");
-    const half = {
-      scapula: Z("scapula", BN("M97 120 L78 127 C76 150 78 170 84 184 C90 192 98 186 100 176 L104 150 Z")),
-      clavicle: Z("clavicle", PL("M147 128 C132 122 112 125 92 118", 4.6)),
-      humerus: Z("humerus", LN(86, 130, 66, 248, 9) + EL(86, 130, 8, 8) + EL(65, 252, 8, 5)),
-      radius: Z("radius", LN(58, 258, 40, 366, 5) + EL(58, 256, 5, 4) + EL(40, 369, 6, 4)),
-      ulna: Z("ulna", LN(68, 256, 55, 366, 5.4) + EL(67, 254, 5.5, 5)),
-      hand: Z("hand-bones",
-        EL(47, 379, 11, 7) + LN(37, 382, 27, 408, 4) + LN(41, 385, 37, 421, 3.6) + LN(47, 386, 46, 428, 3.6) + LN(53, 385, 55, 423, 3.6) + LN(58, 383, 63, 415, 3.2)),
-      hip: Z("hip-bone", BN("M148 268 C130 252 102 250 94 266 C88 281 94 304 106 322 C114 334 124 346 138 352 L148 355 Z") +
-        `<ellipse class="hole" cx="126" cy="331" rx="6.5" ry="11"/><circle class="hole" cx="108" cy="318" r="6"/>`),
-      femur: Z("femur", EL(112, 322, 8, 8) + LN(108, 331, 126, 478, 10) + LN(111, 328, 104, 340, 8) + EL(127, 484, 15, 8)),
-      patella: Z("patella", EL(127, 497, 7.5, 8.5)),
-      tibia: Z("tibia", EL(127, 506, 15, 5.5) + LN(128, 510, 124, 636, 8) + EL(122, 642, 5.4, 5.4)),
-      fibula: Z("fibula", LN(112, 514, 110, 636, 5) + EL(112, 510, 4.8, 4.8) + EL(109, 642, 4.4, 4.4)),
-      foot: Z("foot-bones", EL(118, 658, 14, 9) + [106, 112, 118, 124, 130].map((x, i) => LN(x, 666, x - 1 + (i - 2) * 0.6, 694, 4.2) + LN(x - 1, 696, x - 1 + (i - 2) * 0.6, 704, 3)).join(""))
-    };
-    const leftSide = half.scapula + half.humerus + half.radius + half.ulna + half.hand + half.hip + half.femur + half.tibia + half.fibula + half.foot;
-    return `<svg class="body" viewBox="20 0 260 716" role="img" aria-label="Скелет">
-      <g class="ribs-zone"><g class="zone" data-h="ribs">${mirror(ribs)}</g></g>
-      ${mirror(leftSide)}
-      ${mirror(half.patella)}
-      ${Z("cervical-vertebrae", blocks(7, 90, 6.3, 4.8, 12, 15))}
-      ${Z("thoracic-vertebrae", blocks(12, 134, 7.6, 5.9, 17, 22))}
-      ${Z("lumbar-vertebrae", blocks(5, 226, 10.4, 8.8, 25, 28))}
-      ${Z("sacrum", BN("M138 281 L162 281 L158 322 L150 337 L142 322 Z"))}
-      ${Z("coccyx", BN("M147 338 L153 338 L151.4 351 L148.6 351 Z"))}
-      ${mirror(half.clavicle)}
-      ${Z("sternum", BN("M146 126 L154 126 L155.5 134 L154 174 L150 184 L146 174 L144.5 134 Z"))}
-      ${Z("skull",
-        EL(150, 37, 25, 29) + BN("M129 52 C129 76 139 88 150 88 C161 88 171 76 171 52 C165 60 157 63 150 63 C143 63 135 60 129 52 Z") + BN("M140 62 L160 62 L158 67 L142 67 Z") +
-        `<ellipse class="hole" cx="141" cy="42" rx="5.2" ry="4.6"/><ellipse class="hole" cx="159" cy="42" rx="5.2" ry="4.6"/><path class="hole" d="M150 50 l-3.2 7 h6.4 z"/>`)}
+    // реальная иллюстрация скелета (assets/skeleton-front.svg) + прозрачные зоны нажатия поверх неё
+    const area = (pts) => { const p = pts.split(" ").map((s) => s.split(",").map(Number)); let s = 0; for (let i = 0; i < p.length; i++) { const [x1, y1] = p[i], [x2, y2] = p[(i + 1) % p.length]; s += x1 * y2 - x2 * y1; } return Math.abs(s / 2); };
+    const zones = (window.SKELETON_ZONES || []).slice().sort((u, v) => area(v[1]) - area(u[1]));   // мелкие зоны сверху
+    return `<svg class="body photo" viewBox="30 12 380 828" role="img" aria-label="Скелет, вид спереди">
+      <image href="assets/skeleton-front.svg" width="435.687" height="841.89"/>
+      ${zones.map(([slug, pts]) => `<g class="zone" data-h="${slug}"><polygon class="zp" points="${pts}"/></g>`).join("")}
     </svg>`;
   }
 
@@ -271,14 +235,94 @@
     </svg>`;
   }
 
+  // ---------- Подробные виды: кисть и стопа ----------
+  const SUB = {};   // id мелкой кости -> описание (регистрируется при отрисовке)
+  const subZone = (id, parent, ru, lat, where, inner) => { SUB[id] = { ru, lat, where, parent }; return `<g class="zone" data-h="${id}" data-g="${parent}">${inner}</g>`; };
+  const along = (p, d, len) => [p[0] + d[0] * len, p[1] + d[1] * len];
+  const unit = (d) => { const l = Math.hypot(d[0], d[1]); return [d[0] / l, d[1] / l]; };
+  const ROM = ["I", "II", "III", "IV", "V"];
+  const PH = [["проксимальная", "Phalanx proximalis"], ["средняя", "Phalanx media"], ["дистальная", "Phalanx distalis"]];
+
+  // фаланги одного луча; возвращает SVG
+  function digit(prefix, parent, nameOf, whereOf, start, d, lens, widths) {
+    let p = along(start, d, 4), out = "";
+    lens.forEach((len, k) => {
+      const end = along(p, d, len);
+      const ph = lens.length === 2 && k === 1 ? PH[2] : PH[k];
+      out += subZone(`${prefix}${k}`, parent, `${ph[0][0].toUpperCase() + ph[0].slice(1)} фаланга ${nameOf}`, ph[1], whereOf,
+        LN(p[0], p[1], end[0], end[1], widths[k]));
+      p = along(end, d, 3.6);
+    });
+    return out;
+  }
+
+  function handSVG() {
+    const finger = ["большой палец", "указательный палец", "средний палец", "безымянный палец", "мизинец"];
+    const carpals = [
+      ["scaphoideum", "Ладьевидная кость", "Os scaphoideum", "проксимальный ряд запястья", EL(166, 272, 13, 10)],
+      ["lunatum", "Полулунная кость", "Os lunatum", "проксимальный ряд запястья", EL(139, 274, 12, 10)],
+      ["triquetrum", "Трёхгранная кость", "Os triquetrum", "проксимальный ряд запястья", EL(113, 274, 11, 9.5)],
+      ["pisiforme", "Гороховидная кость", "Os pisiforme", "проксимальный ряд запястья", EL(96, 262, 6.5, 6.5)],
+      ["trapezium", "Кость-трапеция (большая многоугольная)", "Os trapezium", "дистальный ряд запястья", EL(180, 244, 12, 10)],
+      ["trapezoideum", "Трапециевидная кость (малая многоугольная)", "Os trapezoideum", "дистальный ряд запястья", EL(158, 238, 10, 8.5)],
+      ["capitatum", "Головчатая кость", "Os capitatum", "дистальный ряд запястья", EL(134, 240, 13, 11)],
+      ["hamatum", "Крючковидная кость", "Os hamatum", "дистальный ряд запястья", EL(108, 244, 12, 10)]
+    ];
+    const rays = [
+      { base: [184, 238], head: [212, 178], d: unit([0.3, -1]), lens: [30, 24], w: 9 },
+      { base: [158, 230], head: [163, 148], d: unit([0.09, -1]), lens: [34, 20, 17], w: 8 },
+      { base: [133, 228], head: [133, 142], d: unit([0, -1]), lens: [38, 23, 18], w: 8 },
+      { base: [108, 232], head: [102, 148], d: unit([-0.09, -1]), lens: [35, 21, 17], w: 8 },
+      { base: [88, 240], head: [74, 166], d: unit([-0.22, -1]), lens: [27, 15, 15], w: 7 }
+    ];
+    let s = Z("radius", LN(166, 338, 162, 304, 17)) + Z("ulna", LN(106, 338, 108, 308, 12));
+    s += carpals.map(([id, ru, lat, where, shape]) => subZone("hand:" + id, "hand-bones", ru, lat, "Запястье · " + where, shape)).join("");
+    rays.forEach((r, i) => {
+      s += subZone(`hand:mc${i + 1}`, "hand-bones", `Пястная кость ${ROM[i]}`, `Os metacarpale ${ROM[i]}`, `Пясть · ${finger[i]}`,
+        LN(r.base[0], r.base[1], r.head[0], r.head[1], r.w) + EL(r.head[0], r.head[1], r.w / 2 + 0.8, r.w / 2 + 0.8));
+      s += digit(`hand:ph${i + 1}`, "hand-bones", `${ROM[i]} пальца`, `Фаланги · ${finger[i]}`, r.head, r.d, r.lens, [6.6, 5.8, 5.2]);
+    });
+    return `<svg class="body" style="max-width:300px" viewBox="40 40 200 312" role="img" aria-label="Кисть">${s}</svg>`;
+  }
+
+  function footSVG() {
+    const tarsals = [
+      ["calcaneus", "Пяточная кость", "Calcaneus", "проксимальный ряд предплюсны", EL(150, 300, 23, 40)],
+      ["talus", "Таранная кость", "Talus", "проксимальный ряд предплюсны", EL(108, 258, 24, 18)],
+      ["naviculare", "Ладьевидная кость", "Os naviculare", "предплюсна, между таранной и клиновидными", EL(98, 224, 26, 9)],
+      ["cuboideum", "Кубовидная кость", "Os cuboideum", "предплюсна, латеральный край", EL(154, 224, 16, 14)],
+      ["cuneiforme1", "Медиальная клиновидная кость", "Os cuneiforme mediale", "предплюсна, дистальный ряд", EL(72, 202, 11, 14)],
+      ["cuneiforme2", "Промежуточная клиновидная кость", "Os cuneiforme intermedium", "предплюсна, дистальный ряд", EL(98, 200, 11, 10)],
+      ["cuneiforme3", "Латеральная клиновидная кость", "Os cuneiforme laterale", "предплюсна, дистальный ряд", EL(124, 202, 12, 12)]
+    ];
+    const toes = ["большой палец", "II палец", "III палец", "IV палец", "мизинец"];
+    const rays = [
+      { base: [72, 190], head: [62, 104], d: unit([-0.05, -1]), lens: [30, 24], w: 12, pw: [10, 9] },
+      { base: [98, 190], head: [92, 92], d: unit([-0.04, -1]), lens: [24, 14, 12], w: 8.6, pw: [6.4, 5.6, 5] },
+      { base: [124, 192], head: [120, 96], d: unit([0, -1]), lens: [23, 13, 11], w: 8.2, pw: [6.4, 5.6, 5] },
+      { base: [150, 206], head: [146, 106], d: unit([0.03, -1]), lens: [21, 12, 10], w: 7.8, pw: [6.2, 5.4, 4.8] },
+      { base: [170, 222], head: [172, 126], d: unit([0.1, -1]), lens: [18, 10, 9], w: 7.8, pw: [6, 5.2, 4.6] }
+    ];
+    let s = tarsals.map(([id, ru, lat, where, shape]) => subZone("foot:" + id, "foot-bones", ru, lat, "Предплюсна · " + where, shape)).join("");
+    rays.forEach((r, i) => {
+      s += subZone(`foot:mt${i + 1}`, "foot-bones", `Плюсневая кость ${ROM[i]}`, `Os metatarsale ${ROM[i]}`, `Плюсна · ${toes[i]}`,
+        LN(r.base[0], r.base[1], r.head[0], r.head[1], r.w) + EL(r.head[0], r.head[1], r.w / 2 + 0.8, r.w / 2 + 0.8));
+      s += digit(`foot:ph${i + 1}`, "foot-bones", `${ROM[i]} пальца`, `Фаланги · ${toes[i]}`, r.head, r.d, r.lens, r.pw);
+    });
+    return `<svg class="body" style="max-width:250px" viewBox="40 30 160 330" role="img" aria-label="Стопа">${s}</svg>`;
+  }
+
+  const DETAIL = { "skull": ["skull", "💀 Показать череп подробно"], "hand-bones": ["hand", "✋ Показать кисть подробно"], "foot-bones": ["foot", "🦶 Показать стопу подробно"] };
+  const viewOf = (slug) => SKULL_VIEW.has(slug) ? "skull" : slug === "hand-bones" ? "hand" : (slug === "foot-bones" || slug === "foot-arches") ? "foot" : "body";
+
   function applySel() {
-    const set = new Set(atlasSel ? (GROUP[atlasSel] || [atlasSel]) : []);
-    view.querySelectorAll(".zone").forEach((z) => z.classList.toggle("sel", set.has(z.dataset.h)));
+    const set = new Set(atlasSel ? (SUB[atlasSel] ? [atlasSel] : (GROUP[atlasSel] || [atlasSel])) : []);
+    view.querySelectorAll(".zone").forEach((z) => z.classList.toggle("sel", set.has(z.dataset.h) || set.has(z.dataset.g)));
   }
 
   function renderAtlas(q) {
     title.textContent = "Атлас";
-    const seg = `<div class="seg">${[["body", "Скелет"], ["skull", "Череп"], ["list", "Список"]].map(([m, n]) => `<button data-m="${m}" class="${atlasMode === m && !q ? "on" : ""}">${n}</button>`).join("")}</div>`;
+    const seg = `<div class="seg">${[["body", "Скелет"], ["skull", "Череп"], ["hand", "Кисть"], ["foot", "Стопа"], ["list", "Список"]].map(([m, n]) => `<button data-m="${m}" class="${atlasMode === m && !q ? "on" : ""}">${n}</button>`).join("")}</div>`;
     if (q || atlasMode === "list") {
       const items = remote.filter((t) => !q || (t.title + t.section).toLowerCase().includes(q));
       let html = "", last = "";
@@ -289,8 +333,12 @@
       view.innerHTML = seg + `<div class="atlas-box">${skullSVG()}</div><p class="hint">Череп, вид спереди. Нажмите на кость.</p>
         <div class="group">Не видны спереди</div><div class="chips">${HIDDEN_IN_SKULL_FRONT.map((s) => `<button class="chip" data-atlas="${s}">${esc(byId(s) ? byId(s).title : s)}</button>`).join("")}</div>`;
       bindList();
+    } else if (atlasMode === "hand") {
+      view.innerHTML = seg + `<div class="atlas-box">${handSVG()}</div><p class="hint">Правая кисть, ладонная поверхность. Нажмите на кость.</p>`;
+    } else if (atlasMode === "foot") {
+      view.innerHTML = seg + `<div class="atlas-box">${footSVG()}</div><p class="hint">Правая стопа, вид сверху. Нажмите на кость.</p>`;
     } else {
-      view.innerHTML = seg + `<div class="atlas-box">${bodySVG()}</div><p class="hint">Нажмите на кость, чтобы узнать о ней</p>`;
+      view.innerHTML = seg + `<div class="atlas-box">${bodySVG()}</div><p class="hint">Нажмите на кость, чтобы узнать о ней<br>Иллюстрация: LadyofHats (Mariana Ruiz Villarreal), общественное достояние</p>`;
     }
     view.querySelectorAll("svg [data-h]").forEach((el) => el.onclick = () => showSheet(el.dataset.h));
     view.querySelectorAll(".seg button").forEach((b) => b.onclick = () => { atlasMode = b.dataset.m; search.value = ""; atlasSel = null; render(); });
@@ -301,13 +349,27 @@
   // Показать кость из конспекта в атласе
   function goAtlas(slug) {
     tab = "atlas"; openTopic = null; search.value = "";
-    atlasMode = SKULL_VIEW.has(slug) ? "skull" : "body";
+    atlasMode = viewOf(slug);
     atlasSel = slug;
     render();
     showSheet(slug);
   }
 
+  function showSubSheet(id) {
+    const s = SUB[id], parent = byId(s.parent); if (!parent) return;
+    atlasSel = id; applySel();
+    sheet.hidden = false; setBack();
+    sheet.innerHTML = `<div class="box"><h2 style="margin:0">${esc(s.ru)}</h2><div class="latin">${esc(s.lat)}</div>
+      <p style="margin:0 0 4px">${esc(s.where)}</p>
+      <button class="btn" id="sc1">📖 Открыть конспект «${esc(parent.title)}»</button>
+      <button class="btn ghost" id="sc">Закрыть</button></div>`;
+    $("#sc").onclick = () => closeSheet();
+    $("#sc1").onclick = () => { closeSheet(); tab = "notes"; navSystem = "osteo"; navSection = parent.section; openTopic = parent.id; search.value = ""; render(); };
+    sheet.onclick = (ev) => { if (ev.target === sheet) closeSheet(); };
+  }
+
   function showSheet(slug) {
+    if (SUB[slug]) return showSubSheet(slug);
     const t = byId(slug); if (!t) return;
     atlasSel = slug; applySel();
     sheet.hidden = false; setBack();
@@ -317,7 +379,7 @@
         <div class="latin">${esc((d && d.latin) || "")}</div>
         ${bullets.length ? `<ul class="sh">${bullets.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : `<p class="hint">Загрузка…</p>`}
         <button class="btn" id="sc1">📖 Открыть конспект</button>
-        ${slug === "skull" && atlasMode !== "skull" ? `<button class="btn ghost" id="sc3">💀 Показать череп подробно</button>` : ""}
+        ${DETAIL[slug] && atlasMode !== DETAIL[slug][0] ? `<button class="btn ghost" id="sc3">${DETAIL[slug][1]}</button>` : ""}
         <button class="btn ghost" id="sf">${favs.has("t:" + t.id) ? "★ В избранном" : "☆ В избранное"}</button>
         <button class="btn ghost" id="sc">Закрыть</button></div>`;
     };
@@ -326,7 +388,7 @@
       $("#sc").onclick = () => closeSheet();
       $("#sc1").onclick = () => { closeSheet(true); tab = "notes"; navSystem = "osteo"; navSection = t.section; openTopic = slug; search.value = ""; render(); };
       $("#sf").onclick = () => { toggleFav("t:" + t.id); draw(d); };
-      const s3 = $("#sc3"); if (s3) s3.onclick = () => { closeSheet(true); atlasMode = "skull"; atlasSel = "skull"; render(); };
+      const s3 = $("#sc3"); if (s3) s3.onclick = () => { closeSheet(); atlasMode = DETAIL[slug][0]; atlasSel = slug; render(); };
       sheet.onclick = (ev) => { if (ev.target === sheet) closeSheet(); };
     };
     draw(cache[slug] || null);
@@ -335,31 +397,6 @@
   function closeSheet() {
     sheet.hidden = true;   // подсветка кости остаётся, пока не сменить вкладку или режим
     setBack();
-  }
-
-  // ---- Тест ----
-  function renderQuiz() {
-    if (!quiz) quiz = { order: [...QUIZ.keys()].sort(() => Math.random() - 0.5), i: 0, score: 0, done: false, picked: null };
-    if (quiz.done) {
-      view.innerHTML = `<div class="score">${quiz.score}/${QUIZ.length}</div>
-        <p class="hint">${quiz.score >= QUIZ.length * 0.8 ? "Отлично! 🎉" : "Есть что повторить 📚"}</p>
-        <button class="btn" id="again">Ещё раз</button>`;
-      $("#again").onclick = () => { quiz = null; render(); };
-      return;
-    }
-    const q = QUIZ[quiz.order[quiz.i]];
-    view.innerHTML = `<div style="margin-top:16px" class="bar"><i style="width:${(quiz.i / QUIZ.length) * 100}%"></i></div>
-      <div class="q">${esc(q.q)}</div>
-      ${q.a.map((t, i) => `<button class="opt" data-i="${i}">${esc(t)}</button>`).join("")}`;
-    view.querySelectorAll(".opt").forEach((b) => b.onclick = () => {
-      if (quiz.picked !== null) return;
-      const i = +b.dataset.i; quiz.picked = i;
-      const ok = i === q.c; if (ok) quiz.score++;
-      b.classList.add(ok ? "ok" : "bad");
-      view.querySelectorAll(".opt")[q.c].classList.add("ok");
-      try { tg.HapticFeedback.notificationOccurred(ok ? "success" : "error"); } catch (er) {}
-      setTimeout(() => { quiz.picked = null; quiz.i++; if (quiz.i >= QUIZ.length) quiz.done = true; render(); }, 900);
-    });
   }
 
   // ---- Избранное ----
