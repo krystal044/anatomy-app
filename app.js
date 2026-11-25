@@ -15,6 +15,14 @@
 
   let tab = "notes", openTopic = null, atlasMode = "body", quiz = null;
 
+  // Темы из учебника: data/anatomy/index.json + data/anatomy/<slug>.json (грузятся по требованию)
+  let remote = [];
+  const allTopics = () => TOPICS.concat(remote);
+  fetch("data/anatomy/index.json").then((r) => r.json()).then((a) => {
+    remote = a.map((r) => ({ id: r.slug, emoji: r.emoji, title: r.title, system: r.system, file: r.file, remote: true }));
+    render();
+  }).catch(() => {});
+
   // ---- Telegram BackButton ----
   function setBack(on) {
     if (!tg) return;
@@ -60,16 +68,55 @@
 
   // ---- Конспекты ----
   function renderNotes(q) {
-    if (openTopic) return renderArticle(TOPICS.find((t) => t.id === openTopic));
+    if (openTopic) return renderArticle(allTopics().find((t) => t.id === openTopic));
     title.textContent = "Конспекты";
-    const list = TOPICS.filter((t) => !q || (t.title + t.system + t.sections.map((s) => s.h + s.p).join(" ")).toLowerCase().includes(q));
+    const list = allTopics().filter((t) => !q || (t.title + t.system + (t.sections || []).map((s) => s.h + s.p).join(" ")).toLowerCase().includes(q));
     let html = "", last = "";
     list.forEach((t) => { if (t.system !== last) { html += `<div class="group">${esc(t.system)}</div>`; last = t.system; } html += topicCard(t); });
     view.innerHTML = html || `<div class="empty">Ничего не найдено</div>`;
     bindList();
   }
 
+  function renderRemote(t) {
+    const draw = (d) => {
+      const note = store.get("note:" + t.id, "");
+      const li = (a) => `<ul>${a.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
+      view.innerHTML = `<div class="article">
+        <button class="back" id="bk">‹ Назад</button>
+        <h2>${t.emoji} ${esc(d.title)}</h2><div class="s" style="color:var(--hint)">${esc(d.latin || "")} · ${esc(d.system)}</div>
+        ${d.blocks.map((b) => `<h3>${esc(b.h)}</h3>${li(b.items)}`).join("")}
+        <h3>🏷 Термины</h3><table class="terms">${d.terms.map((x) => `<tr><td>${esc(x.ru)}</td><td><i>${esc(x.lat)}</i></td></tr>`).join("")}</table>
+        <div class="exam"><h3>⚠️ На зачёте / запомнить</h3>${li(d.exam)}</div>
+        <h3>🃏 Карточки <span class="hint">(нажмите, чтобы открыть)</span></h3>
+        ${d.cards.map((c) => `<div class="flash"><b>${esc(c.term)}</b><p hidden>${esc(c.def)}</p></div>`).join("")}
+        <h3>🎯 Мини-тест</h3>
+        ${d.quiz.map((q, qi) => `<div class="mq"><div class="q">${esc(q.q)}</div>${q.a.map((o, i) => `<button class="opt" data-q="${qi}" data-i="${i}">${esc(o)}</button>`).join("")}<p class="why" hidden></p></div>`).join("")}
+        <h3>✍️ Мои заметки</h3>
+        <textarea id="note" placeholder="Запишите своё…">${esc(note)}</textarea>
+        <button class="btn ghost" id="fv">${favs.has("t:" + t.id) ? "★ В избранном" : "☆ В избранное"}</button>
+        <p class="hint">Источник: ${esc(d.source.book)}${d.source.pages ? ", стр. " + esc(d.source.pages) : ""}</p></div>`;
+      $("#bk").onclick = () => { openTopic = null; render(); };
+      $("#note").oninput = (e) => store.set("note:" + t.id, e.target.value);
+      $("#fv").onclick = () => { toggleFav("t:" + t.id); render(); };
+      view.querySelectorAll(".flash").forEach((f) => f.onclick = () => { const p = f.querySelector("p"); p.hidden = !p.hidden; });
+      view.querySelectorAll(".mq").forEach((box, qi) => {
+        const q = d.quiz[qi];
+        box.querySelectorAll(".opt").forEach((b) => b.onclick = () => {
+          if (box.dataset.done) return; box.dataset.done = 1;
+          const ok = +b.dataset.i === q.c;
+          b.classList.add(ok ? "ok" : "bad"); box.querySelectorAll(".opt")[q.c].classList.add("ok");
+          const w = box.querySelector(".why"); w.textContent = q.why; w.hidden = false;
+        });
+      });
+    };
+    if (t.data) return draw(t.data);
+    view.innerHTML = `<div class="empty">Загрузка…</div>`;
+    fetch(t.file).then((r) => r.json()).then((d) => { t.data = d; if (openTopic === t.id) draw(d); })
+      .catch(() => { view.innerHTML = `<div class="empty">Не удалось загрузить тему</div>`; });
+  }
+
   function renderArticle(t) {
+    if (t.remote) return renderRemote(t);
     const note = store.get("note:" + t.id, "");
     view.innerHTML = `<div class="article">
       <button class="back" id="bk">‹ Назад</button>
@@ -160,12 +207,12 @@
   // ---- Избранное ----
   function renderFav() {
     title.textContent = "Избранное";
-    const ts = TOPICS.filter((t) => favs.has("t:" + t.id)), as = ATLAS.filter((a) => favs.has("a:" + a.id));
+    const ts = allTopics().filter((t) => favs.has("t:" + t.id)), as = ATLAS.filter((a) => favs.has("a:" + a.id));
     view.innerHTML = (ts.length ? `<div class="group">Конспекты</div>` + ts.map(topicCard).join("") : "") +
       (as.length ? `<div class="group">Атлас</div>` + as.map(atlasCard).join("") : "") ||
       `<div class="empty">Пока пусто.<br>Нажмите ★ у темы или структуры.</div>`;
     bindList();
-    if (openTopic) renderArticle(TOPICS.find((t) => t.id === openTopic));
+    if (openTopic) renderArticle(allTopics().find((t) => t.id === openTopic));
   }
 
   render();
