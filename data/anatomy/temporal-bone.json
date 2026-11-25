@@ -1,0 +1,215 @@
+{
+  "slug": "temporal-bone",
+  "title": "Височная кость",
+  "latin": "Os temporale",
+  "emoji": "💀",
+  "system": "Остеология",
+  "source": { "book": "Гайворонский", "pages": "28-34" },
+  "blocks": [
+    {
+      "h": "Общие сведения",
+      "items": [
+        "Парная кость между затылочной и клиновидной костями.",
+        "Содержит орган слуха и равновесия; через неё проходят важнейшие сосуды и нервы.",
+        "Части: каменистая, барабанная, сосцевидная и чешуйчатая."
+      ]
+    },
+    {
+      "h": "Каменистая часть: общее",
+      "items": [
+        "Pars petrosa (pyramis) имеет форму трёхгранной пирамиды.",
+        "Выделяют верхушку, основание, три поверхности и три края.",
+        "Верхушка (apex pyramis) обращена вперёд и медиально.",
+        "На верхушке открываются apertura interna canalis carotici и canalis musculotubarius.",
+        "Основание пирамиды прикрыто барабанной частью."
+      ]
+    },
+    {
+      "h": "Передняя поверхность пирамиды",
+      "items": [
+        "Обращена в среднюю черепную ямку.",
+        "Fissura petrosquamosa отделяет пирамиду от чешуи.",
+        "Impressio trigeminalis лежит ближе к верхушке (узел тройничного нерва).",
+        "Hiatus canalis nervi petrosi majoris расположена медиальнее, minoris — латеральнее.",
+        "Eminentia arcuata посередине соответствует переднему полукружному каналу.",
+        "Tegmen tympani — крыша барабанной полости, позади eminentia arcuata."
+      ]
+    },
+    {
+      "h": "Задняя и нижняя поверхности",
+      "items": [
+        "Задняя обращена в заднюю черепную ямку; на ней porus acusticus internus.",
+        "Через meatus acusticus internus идут лицевой и преддверно-улитковый нервы.",
+        "Fossa subarcuata лежит кзади от внутреннего слухового отверстия, под eminentia arcuata.",
+        "На нижней поверхности: fossa jugularis сзади, apertura externa canalis carotici впереди неё.",
+        "Fossula petrosa на гребешке между сонным отверстием и яремной ямкой.",
+        "Foramen stylomastoideum между processus styloideus и processus mastoideus."
+      ]
+    },
+    {
+      "h": "Края пирамиды",
+      "items": [
+        "Margo anterior: под ним открывается мышечно-трубный канал.",
+        "Margo superior разделяет переднюю и заднюю поверхности; по нему sulcus sinus petrosi superioris.",
+        "Margo posterior разделяет заднюю и нижнюю поверхности.",
+        "По заднему краю идёт sulcus sinus petrosi inferioris.",
+        "Apertura (externa) canaliculi cochleae у заднего конца заднего края."
+      ]
+    },
+    {
+      "h": "Барабанная и сосцевидная части",
+      "items": [
+        "Pars tympanica ограничивает снаружи наружный слуховой проход (porus acusticus externus).",
+        "Fissura tympanomastoidea отделяет барабанную часть от сосцевидной.",
+        "Fissura tympanosquamosa делится на petrosquamosa и petrotympanica.",
+        "Pars mastoidea лежит сзади от наружного слухового прохода.",
+        "Foramen mastoideum непостоянное, венозный выпускник; открывается в sulcus sinus sigmoidei.",
+        "Antrum mastoideum — самая крупная ячейка, сообщается с барабанной полостью."
+      ]
+    },
+    {
+      "h": "Чешуйчатая часть",
+      "items": [
+        "Входит в состав крыши черепа.",
+        "Мозговая поверхность: sulci arteriosi, impressiones digitatae, juga cerebralia.",
+        "Височная поверхность: processus zygomaticus и fossa mandibularis.",
+        "Fossa mandibularis участвует в образовании височно-нижнечелюстного сустава.",
+        "Tuberculum articulare лежит впереди fossa mandibularis."
+      ]
+    },
+    {
+      "h": "Ориентация кости",
+      "items": [
+        "Верхушка пирамиды направлена вперёд и медиально.",
+        "Сосцевидный отросток направлен назад и вниз.",
+        "Наружный слуховой проход обращён латерально, внутренний — медиально.",
+        "Eminentia arcuata обращена вверх, шиловидный отросток — вниз."
+      ]
+    },
+    {
+      "h": "Канал лицевого нерва",
+      "items": [
+        "Canalis nervi facialis начинается на дне meatus acusticus internus.",
+        "У hiatus canalis nervi petrosi majoris изгиб под углом 90° — geniculum.",
+        "Затем идёт назад, огибает барабанную полость, спускается вниз к foramen stylomastoideum.",
+        "Ответвления: canalis nervi petrosi majoris и canaliculus chordae tympani.",
+        "Canaliculus chordae tympani заканчивается в fissura petrotympanica."
+      ]
+    },
+    {
+      "h": "Другие каналы",
+      "items": [
+        "Canaliculus tympanicus: от fossula petrosa до hiatus canalis nervi petrosi minoris.",
+        "Canalis musculotubarius делится septum на semicanalis musculi tensoris tympani (верхний) и semicanalis tubae auditivae (нижний).",
+        "Canalis caroticus: от наружной апертуры вверх, изгиб кпереди на 90°, выход на верхушке.",
+        "Canaliculi caroticotympanici (обычно два) идут от сонного канала в барабанную полость.",
+        "Canaliculus mastoideus начинается в fossa jugularis и открывается в fissura tympanomastoidea."
+      ]
+    }
+  ],
+  "terms": [
+    { "ru": "Височная кость", "lat": "Os temporale" },
+    { "ru": "Каменистая часть (пирамида)", "lat": "Pars petrosa (pyramis)" },
+    { "ru": "Барабанная часть", "lat": "Pars tympanica" },
+    { "ru": "Сосцевидная часть", "lat": "Pars mastoidea" },
+    { "ru": "Чешуйчатая часть", "lat": "Pars squamosa" },
+    { "ru": "Верхушка пирамиды", "lat": "Apex pyramis" },
+    { "ru": "Основание пирамиды", "lat": "Basis pyramis" },
+    { "ru": "Каменисто-чешуйчатая щель", "lat": "Fissura petrosquamosa" },
+    { "ru": "Каменисто-барабанная щель", "lat": "Fissura petrotympanica" },
+    { "ru": "Барабанно-чешуйчатая щель", "lat": "Fissura tympanosquamosa" },
+    { "ru": "Барабанно-сосцевидная щель", "lat": "Fissura tympanomastoidea" },
+    { "ru": "Тройничное вдавление", "lat": "Impressio trigeminalis" },
+    { "ru": "Расщелина канала большого каменистого нерва", "lat": "Hiatus canalis nervi petrosi majoris" },
+    { "ru": "Расщелина канала малого каменистого нерва", "lat": "Hiatus canalis nervi petrosi minoris" },
+    { "ru": "Дугообразное возвышение", "lat": "Eminentia arcuata" },
+    { "ru": "Крыша барабанной полости", "lat": "Tegmen tympani" },
+    { "ru": "Внутреннее слуховое отверстие", "lat": "Porus acusticus internus" },
+    { "ru": "Внутренний слуховой проход", "lat": "Meatus acusticus internus" },
+    { "ru": "Наружное слуховое отверстие", "lat": "Porus acusticus externus" },
+    { "ru": "Наружный слуховой проход", "lat": "Meatus acusticus externus" },
+    { "ru": "Поддуговая ямка", "lat": "Fossa subarcuata" },
+    { "ru": "Яремная ямка", "lat": "Fossa jugularis" },
+    { "ru": "Каменистая ямочка", "lat": "Fossula petrosa" },
+    { "ru": "Шиловидный отросток", "lat": "Processus styloideus" },
+    { "ru": "Шилососцевидное отверстие", "lat": "Foramen stylomastoideum" },
+    { "ru": "Сосцевидный отросток", "lat": "Processus mastoideus" },
+    { "ru": "Сосцевидное отверстие", "lat": "Foramen mastoideum" },
+    { "ru": "Сосцевидная пещера", "lat": "Antrum mastoideum" },
+    { "ru": "Сосцевидные ячейки", "lat": "Cellulae mastoideae" },
+    { "ru": "Борозда сигмовидного синуса", "lat": "Sulcus sinus sigmoidei" },
+    { "ru": "Борозда верхнего каменистого синуса", "lat": "Sulcus sinus petrosi superioris" },
+    { "ru": "Борозда нижнего каменистого синуса", "lat": "Sulcus sinus petrosi inferioris" },
+    { "ru": "Скуловой отросток", "lat": "Processus zygomaticus" },
+    { "ru": "Нижнечелюстная ямка", "lat": "Fossa mandibularis" },
+    { "ru": "Суставной бугорок", "lat": "Tuberculum articulare" },
+    { "ru": "Канал лицевого нерва", "lat": "Canalis nervi facialis" },
+    { "ru": "Коленце канала лицевого нерва", "lat": "Geniculum canalis nervi facialis" },
+    { "ru": "Каналец барабанной струны", "lat": "Canaliculus chordae tympani" },
+    { "ru": "Барабанный каналец", "lat": "Canaliculus tympanicus" },
+    { "ru": "Мышечно-трубный канал", "lat": "Canalis musculotubarius" },
+    { "ru": "Сонный канал", "lat": "Canalis caroticus" },
+    { "ru": "Сонно-барабанные канальцы", "lat": "Canaliculi caroticotympanici" },
+    { "ru": "Сосцевидный каналец", "lat": "Canaliculus mastoideus" }
+  ],
+  "exam": [
+    "Четыре части височной кости и их границы (щели между ними).",
+    "Поверхности и края пирамиды и что на каждом расположено.",
+    "Ход канала лицевого нерва: от дна внутреннего слухового прохода до шилососцевидного отверстия, его ветви.",
+    "Сонный канал: наружная и внутренняя апертуры, изгиб на 90°.",
+    "Мышечно-трубный канал и его два полуканала.",
+    "Ориентация кости: куда обращены верхушка, сосцевидный и шиловидный отростки."
+  ],
+  "cards": [
+    { "term": "Eminentia arcuata", "def": "Дугообразное возвышение на передней поверхности пирамиды; соответствует переднему полукружному каналу." },
+    { "term": "Tegmen tympani", "def": "Крыша барабанной полости; площадка позади дугообразного возвышения." },
+    { "term": "Porus acusticus internus", "def": "Внутреннее слуховое отверстие на задней поверхности пирамиды; ведёт во внутренний слуховой проход." },
+    { "term": "Foramen stylomastoideum", "def": "Шилососцевидное отверстие между шиловидным и сосцевидным отростками; здесь заканчивается канал лицевого нерва." },
+    { "term": "Fossa jugularis", "def": "Яремная ямка в задней части нижней поверхности пирамиды." },
+    { "term": "Antrum mastoideum", "def": "Сосцевидная пещера: самая крупная ячейка сосцевидного отростка, сообщается с барабанной полостью." },
+    { "term": "Foramen mastoideum", "def": "Сосцевидное отверстие: непостоянный венозный выпускник на задней поверхности сосцевидного отростка." },
+    { "term": "Geniculum canalis nervi facialis", "def": "Коленце канала лицевого нерва: изгиб под углом 90° у hiatus canalis nervi petrosi majoris." },
+    { "term": "Canaliculus chordae tympani", "def": "Каналец барабанной струны: отходит от канала лицевого нерва выше шилососцевидного отверстия, заканчивается в fissura petrotympanica." },
+    { "term": "Canalis musculotubarius", "def": "Мышечно-трубный канал: соединяет барабанную полость с верхушкой пирамиды; делится септой на два полуканала." },
+    { "term": "Tuberculum articulare", "def": "Суставной бугорок впереди нижнечелюстной ямки чешуйчатой части." },
+    { "term": "Fossula petrosa", "def": "Каменистая ямочка на гребешке между наружным сонным отверстием и яремной ямкой; в ней начинается барабанный каналец." }
+  ],
+  "quiz": [
+    {
+      "q": "Какая щель разделяет барабанную и сосцевидную части?",
+      "a": ["Fissura petrosquamosa", "Fissura tympanomastoidea", "Fissura petrotympanica", "Fissura tympanosquamosa"],
+      "c": 1,
+      "why": "Барабанно-сосцевидная щель лежит между pars tympanica и pars mastoidea."
+    },
+    {
+      "q": "Что находится на передней поверхности пирамиды ближе к верхушке?",
+      "a": ["Fossa subarcuata", "Fossa jugularis", "Porus acusticus internus", "Impressio trigeminalis"],
+      "c": 3,
+      "why": "Тройничное вдавление расположено ближе к верхушке, к нему прилежит узел тройничного нерва."
+    },
+    {
+      "q": "Где заканчивается канал лицевого нерва?",
+      "a": ["Foramen stylomastoideum", "Apertura interna canalis carotici", "Hiatus canalis nervi petrosi minoris", "Fossa jugularis"],
+      "c": 0,
+      "why": "Канал лицевого нерва идёт вертикально вниз и заканчивается шилососцевидным отверстием."
+    },
+    {
+      "q": "На какие части делится мышечно-трубный канал?",
+      "a": ["Сонный и яремный", "Передний и задний", "Полуканал мышцы, напрягающей барабанную перепонку, и полуканал слуховой трубы", "Верхний и нижний каменистые"],
+      "c": 2,
+      "why": "Горизонтальная перегородка делит канал на верхний и нижний полуканалы."
+    },
+    {
+      "q": "Какое образование сосцевидной части является непостоянным венозным выпускником?",
+      "a": ["Incisura parietalis", "Foramen mastoideum", "Antrum mastoideum", "Sulcus arteriae occipitalis"],
+      "c": 1,
+      "why": "Сосцевидное отверстие непостоянно и служит венозным выпускником."
+    },
+    {
+      "q": "Куда направлен сосцевидный отросток?",
+      "a": ["Вперёд и медиально", "Вверх", "Медиально", "Назад и вниз"],
+      "c": 3,
+      "why": "Сосцевидный отросток направлен назад и вниз, а вперёд и медиально обращена верхушка пирамиды."
+    }
+  ]
+}

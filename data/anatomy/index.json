@@ -1,0 +1,282 @@
+[
+  {
+    "slug": "obshchaya-osteologiya",
+    "title": "Общая остеология",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/obshchaya-osteologiya.json"
+  },
+  {
+    "slug": "vertebrae",
+    "title": "Позвонки (общее строение)",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/vertebrae.json"
+  },
+  {
+    "slug": "cervical-vertebrae",
+    "title": "Шейные позвонки",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/cervical-vertebrae.json"
+  },
+  {
+    "slug": "thoracic-vertebrae",
+    "title": "Грудные позвонки",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/thoracic-vertebrae.json"
+  },
+  {
+    "slug": "lumbar-vertebrae",
+    "title": "Поясничные позвонки",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/lumbar-vertebrae.json"
+  },
+  {
+    "slug": "sacrum",
+    "title": "Крестец",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/sacrum.json"
+  },
+  {
+    "slug": "coccyx",
+    "title": "Копчик",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/coccyx.json"
+  },
+  {
+    "slug": "ribs",
+    "title": "Рёбра",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/ribs.json"
+  },
+  {
+    "slug": "sternum",
+    "title": "Грудина",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/sternum.json"
+  },
+  {
+    "slug": "skull",
+    "title": "Череп (общее)",
+    "emoji": "💀",
+    "system": "Остеология",
+    "file": "data/anatomy/skull.json"
+  },
+  {
+    "slug": "occipital-bone",
+    "title": "Затылочная кость",
+    "emoji": "💀",
+    "system": "Остеология",
+    "file": "data/anatomy/occipital-bone.json"
+  },
+  {
+    "slug": "parietal-bone",
+    "title": "Теменная кость",
+    "emoji": "💀",
+    "system": "Остеология",
+    "file": "data/anatomy/parietal-bone.json"
+  },
+  {
+    "slug": "frontal-bone",
+    "title": "Лобная кость",
+    "emoji": "💀",
+    "system": "Остеология",
+    "file": "data/anatomy/frontal-bone.json"
+  },
+  {
+    "slug": "ethmoid-bone",
+    "title": "Решётчатая кость",
+    "emoji": "💀",
+    "system": "Остеология",
+    "file": "data/anatomy/ethmoid-bone.json"
+  },
+  {
+    "slug": "sphenoid-bone",
+    "title": "Клиновидная кость",
+    "emoji": "💀",
+    "system": "Остеология",
+    "file": "data/anatomy/sphenoid-bone.json"
+  },
+  {
+    "slug": "temporal-bone",
+    "title": "Височная кость",
+    "emoji": "💀",
+    "system": "Остеология",
+    "file": "data/anatomy/temporal-bone.json"
+  },
+  {
+    "slug": "maxilla",
+    "title": "Верхняя челюсть",
+    "emoji": "💀",
+    "system": "Остеология",
+    "file": "data/anatomy/maxilla.json"
+  },
+  {
+    "slug": "palatine-bone",
+    "title": "Небная кость",
+    "emoji": "💀",
+    "system": "Остеология",
+    "file": "data/anatomy/palatine-bone.json"
+  },
+  {
+    "slug": "zygomatic-bone",
+    "title": "Скуловая кость",
+    "emoji": "💀",
+    "system": "Остеология",
+    "file": "data/anatomy/zygomatic-bone.json"
+  },
+  {
+    "slug": "nasal-bone",
+    "title": "Носовая кость",
+    "emoji": "💀",
+    "system": "Остеология",
+    "file": "data/anatomy/nasal-bone.json"
+  },
+  {
+    "slug": "lacrimal-bone",
+    "title": "Слёзная кость",
+    "emoji": "💀",
+    "system": "Остеология",
+    "file": "data/anatomy/lacrimal-bone.json"
+  },
+  {
+    "slug": "inferior-nasal-concha",
+    "title": "Нижняя носовая раковина",
+    "emoji": "💀",
+    "system": "Остеология",
+    "file": "data/anatomy/inferior-nasal-concha.json"
+  },
+  {
+    "slug": "vomer",
+    "title": "Сошник",
+    "emoji": "💀",
+    "system": "Остеология",
+    "file": "data/anatomy/vomer.json"
+  },
+  {
+    "slug": "mandible",
+    "title": "Нижняя челюсть",
+    "emoji": "💀",
+    "system": "Остеология",
+    "file": "data/anatomy/mandible.json"
+  },
+  {
+    "slug": "hyoid-bone",
+    "title": "Подъязычная кость",
+    "emoji": "💀",
+    "system": "Остеология",
+    "file": "data/anatomy/hyoid-bone.json"
+  },
+  {
+    "slug": "upper-limb-skeleton",
+    "title": "Скелет верхней конечности",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/upper-limb-skeleton.json"
+  },
+  {
+    "slug": "scapula",
+    "title": "Лопатка",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/scapula.json"
+  },
+  {
+    "slug": "clavicle",
+    "title": "Ключица",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/clavicle.json"
+  },
+  {
+    "slug": "humerus",
+    "title": "Плечевая кость",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/humerus.json"
+  },
+  {
+    "slug": "ulna",
+    "title": "Локтевая кость",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/ulna.json"
+  },
+  {
+    "slug": "radius",
+    "title": "Лучевая кость",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/radius.json"
+  },
+  {
+    "slug": "hand-bones",
+    "title": "Кости кисти",
+    "emoji": "✋",
+    "system": "Остеология",
+    "file": "data/anatomy/hand-bones.json"
+  },
+  {
+    "slug": "lower-limb-skeleton",
+    "title": "Скелет нижней конечности",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/lower-limb-skeleton.json"
+  },
+  {
+    "slug": "hip-bone",
+    "title": "Тазовая кость",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/hip-bone.json"
+  },
+  {
+    "slug": "femur",
+    "title": "Бедренная кость",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/femur.json"
+  },
+  {
+    "slug": "patella",
+    "title": "Надколенник",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/patella.json"
+  },
+  {
+    "slug": "tibia",
+    "title": "Большеберцовая кость",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/tibia.json"
+  },
+  {
+    "slug": "fibula",
+    "title": "Малоберцовая кость",
+    "emoji": "🦴",
+    "system": "Остеология",
+    "file": "data/anatomy/fibula.json"
+  },
+  {
+    "slug": "foot-bones",
+    "title": "Кости стопы",
+    "emoji": "🦶",
+    "system": "Остеология",
+    "file": "data/anatomy/foot-bones.json"
+  },
+  {
+    "slug": "foot-arches",
+    "title": "Своды стопы",
+    "emoji": "🦶",
+    "system": "Остеология",
+    "file": "data/anatomy/foot-arches.json"
+  }
+]
